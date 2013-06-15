@@ -1,0 +1,21 @@
+body{
+	padding:0;
+	margin:0;
+}
+.mathLine{
+    padding-left: 10px;
+	border-bottom:1px solid #f5f5f5;
+	border-top:1px solid #fff;
+	background:#fbfbfb;
+	min-height:42px;
+    line-height: 42px;
+	transition:all 1s;
+}
+.mathLine:hover{
+	border-top:1px solid #f0f0f0;
+	background:#fff;
+}
+.mathquill-editable{
+    border: none;
+    outline: none;
+}
