@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'm\xb8!ZkE\x97\xfd=FK\x98?(J['
+_lr_signature = '%\xb8\xc2\re\x80\x11\xcc.\x1a\xcb\x03V]<\xd8'
     
-_lr_action_items = {'$end':([2,3,4,6,8,16,18,19,20,21,22,23,25,],[-11,-10,0,-2,-11,-8,-1,-9,-3,-6,-4,-5,-7,]),'FRAC':([0,1,5,7,10,12,13,14,15,17,],[1,1,1,1,1,1,1,1,1,1,]),'DIVIDE':([2,3,6,8,9,11,16,18,19,20,21,22,23,24,25,],[-11,-10,13,-11,13,13,-8,13,-9,13,-6,13,-5,13,-7,]),'RPAREN':([3,8,11,16,19,20,21,22,23,25,],[-10,-11,19,-8,-9,-3,-6,-4,-5,-7,]),'NUMBER':([0,1,5,7,10,12,13,14,15,17,],[3,3,3,3,3,3,3,3,3,3,]),'EQUALS':([2,],[10,]),'MIDDLE':([3,8,9,16,19,20,21,22,23,25,],[-10,-11,17,-8,-9,-3,-6,-4,-5,-7,]),'PLUS':([2,3,6,8,9,11,16,18,19,20,21,22,23,24,25,],[-11,-10,12,-11,12,12,-8,12,-9,-3,-6,-4,-5,12,-7,]),'LPAREN':([0,1,5,7,10,12,13,14,15,17,],[5,5,5,5,5,5,5,5,5,5,]),'END':([3,8,16,19,20,21,22,23,24,25,],[-10,-11,-8,-9,-3,-6,-4,-5,25,-7,]),'TIMES':([2,3,6,8,9,11,16,18,19,20,21,22,23,24,25,],[-11,-10,15,-11,15,15,-8,15,-9,15,-6,15,-5,15,-7,]),'MINUS':([0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,],[7,7,-11,-10,7,14,7,-11,14,7,14,7,7,7,7,-8,7,14,-9,-3,-6,-4,-5,14,-7,]),'NAME':([0,1,5,7,10,12,13,14,15,17,],[2,8,8,8,8,8,8,8,8,8,]),}
+_lr_action_items = {'$end':([2,3,4,6,7,9,17,19,20,21,22,23,24,26,],[-12,-10,0,-11,-2,-12,-8,-1,-9,-3,-6,-4,-5,-7,]),'FRAC':([0,1,5,8,11,13,14,15,16,18,],[1,1,1,1,1,1,1,1,1,1,]),'NAME':([0,1,5,8,11,13,14,15,16,18,],[2,9,9,9,9,9,9,9,9,9,]),'TIMES':([2,3,6,7,9,10,12,17,19,20,21,22,23,24,25,26,],[-12,-10,-11,16,-12,16,16,-8,16,-9,16,-6,16,-5,16,-7,]),'END':([3,6,9,17,20,21,22,23,24,25,26,],[-10,-11,-12,-8,-9,-3,-6,-4,-5,26,-7,]),'NUMBER':([0,1,5,8,11,13,14,15,16,18,],[3,3,3,3,3,3,3,3,3,3,]),'EQUALS':([2,],[11,]),'MIDDLE':([3,6,9,10,17,20,21,22,23,24,26,],[-10,-11,-12,18,-8,-9,-3,-6,-4,-5,-7,]),'PLUS':([2,3,6,7,9,10,12,17,19,20,21,22,23,24,25,26,],[-12,-10,-11,13,-12,13,13,-8,13,-9,-3,-6,-4,-5,13,-7,]),'LPAREN':([0,1,5,8,11,13,14,15,16,18,],[5,5,5,5,5,5,5,5,5,5,]),'RPAREN':([3,6,9,12,17,20,21,22,23,24,26,],[-10,-11,-12,20,-8,-9,-3,-6,-4,-5,-7,]),'PI':([0,1,5,8,11,13,14,15,16,18,],[6,6,6,6,6,6,6,6,6,6,]),'MINUS':([0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,],[8,8,-12,-10,8,-11,15,8,-12,15,8,15,8,8,8,8,-8,8,15,-9,-3,-6,-4,-5,15,-7,]),'DIVIDE':([2,3,6,7,9,10,12,17,19,20,21,22,23,24,25,26,],[-12,-10,-11,14,-12,14,14,-8,14,-9,14,-6,14,-5,14,-7,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,1,5,7,10,12,13,14,15,17,],[6,9,11,16,18,20,21,22,23,24,]),'statement':([0,],[4,]),}
+_lr_goto_items = {'expression':([0,1,5,8,11,13,14,15,16,18,],[7,10,12,17,19,21,22,23,24,25,]),'statement':([0,],[4,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -26,15 +26,16 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> statement","S'",1,None,None,None),
-  ('statement -> NAME EQUALS expression','statement',3,'p_statement_assign','/home/kristoffer/PycharmProjects/test/calc.py',66),
-  ('statement -> expression','statement',1,'p_statement_expr','/home/kristoffer/PycharmProjects/test/calc.py',70),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','/home/kristoffer/PycharmProjects/test/calc.py',74),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','/home/kristoffer/PycharmProjects/test/calc.py',75),
-  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','/home/kristoffer/PycharmProjects/test/calc.py',76),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','/home/kristoffer/PycharmProjects/test/calc.py',77),
-  ('expression -> FRAC expression MIDDLE expression END','expression',5,'p_expression_devide','/home/kristoffer/PycharmProjects/test/calc.py',84),
-  ('expression -> MINUS expression','expression',2,'p_expression_uminus','/home/kristoffer/PycharmProjects/test/calc.py',89),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','/home/kristoffer/PycharmProjects/test/calc.py',93),
-  ('expression -> NUMBER','expression',1,'p_expression_number','/home/kristoffer/PycharmProjects/test/calc.py',97),
-  ('expression -> NAME','expression',1,'p_expression_name','/home/kristoffer/PycharmProjects/test/calc.py',101),
+  ('statement -> NAME EQUALS expression','statement',3,'p_statement_assign','/home/kristoffer/PycharmProjects/test/calc.py',68),
+  ('statement -> expression','statement',1,'p_statement_expr','/home/kristoffer/PycharmProjects/test/calc.py',72),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','/home/kristoffer/PycharmProjects/test/calc.py',76),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','/home/kristoffer/PycharmProjects/test/calc.py',77),
+  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','/home/kristoffer/PycharmProjects/test/calc.py',78),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','/home/kristoffer/PycharmProjects/test/calc.py',79),
+  ('expression -> FRAC expression MIDDLE expression END','expression',5,'p_expression_devide','/home/kristoffer/PycharmProjects/test/calc.py',86),
+  ('expression -> MINUS expression','expression',2,'p_expression_uminus','/home/kristoffer/PycharmProjects/test/calc.py',91),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','/home/kristoffer/PycharmProjects/test/calc.py',95),
+  ('expression -> NUMBER','expression',1,'p_expression_number','/home/kristoffer/PycharmProjects/test/calc.py',99),
+  ('expression -> PI','expression',1,'p_expression_pi','/home/kristoffer/PycharmProjects/test/calc.py',103),
+  ('expression -> NAME','expression',1,'p_expression_name','/home/kristoffer/PycharmProjects/test/calc.py',107),
 ]

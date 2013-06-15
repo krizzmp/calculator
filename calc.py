@@ -5,10 +5,11 @@ __author__ = 'kristoffer'
 #
 # A simple calculator with variables -- all in one file.
 # -----------------------------------------------------------------------------
+import math
 
 tokens = (
     'NAME','NUMBER',
-    'PLUS','MINUS','TIMES','DIVIDE','FRAC','MIDDLE','END','EQUALS',
+    'PLUS','MINUS','TIMES','DIVIDE','FRAC','MIDDLE','END','EQUALS','PI',
     'LPAREN','RPAREN',
     )
 
@@ -25,6 +26,7 @@ t_EQUALS  = r'='
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
+t_PI      = r'@pi'
 
 def t_NUMBER(t):
     r'\d+'
@@ -97,6 +99,10 @@ def p_expression_number(t):
     'expression : NUMBER'
     t[0] = t[1]
 
+def p_expression_pi(t):
+    'expression : PI'
+    t[0] = math.pi
+
 def p_expression_name(t):
     'expression : NAME'
     try:
@@ -117,4 +123,4 @@ def parseIt(s):
     return result[0]
 
 if __name__ == "__main__":
-    print 'return value:',parseIt('@frac{2}{3}@cdo8'),'end'
+    print 'return value:',parseIt('@pi@cdot'),'end'
