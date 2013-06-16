@@ -6,6 +6,7 @@ __author__ = 'kristoffer'
 # A simple calculator with variables -- all in one file.
 # -----------------------------------------------------------------------------
 import math
+import sympy
 
 tokens = (
     'NAME','NUMBER',
@@ -89,7 +90,7 @@ def p_expression_devide(t):
 
 def p_expression_sin(t):
     'expression : SIN LPAREN expression RPAREN'
-    t[0] = math.sin(t[3])
+    t[0] = sympy.sin(t[3])
 
 
 def p_expression_uminus(t):
@@ -106,7 +107,7 @@ def p_expression_number(t):
 
 def p_expression_pi(t):
     'expression : PI'
-    t[0] = math.pi
+    t[0] = sympy.pi
 
 def p_expression_name(t):
     'expression : NAME'

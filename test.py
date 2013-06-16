@@ -29,9 +29,9 @@ def window_title_change(web, param):
     if web.get_title().startswith("msgToPython:::"):
         message = web.get_title().split(":::",1)[1]
         # Now, send a message back to JavaScript
-        print 'h',Decimal(calc.parseIt(message))
+        print calc.parseIt(message)
         return_message = "You chose '%d'. How interesting." % calc.parseIt(message)
-        web.execute_script("jsCallback(%s)" %json.dumps(calc.parseIt(message)))
+        web.execute_script("jsCallback('%s')" %calc.parseIt(message))
 
 
 web.connect("notify::title", window_title_change)
