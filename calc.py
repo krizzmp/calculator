@@ -9,7 +9,7 @@ import math
 
 tokens = (
     'NAME','NUMBER',
-    'PLUS','MINUS','TIMES','DIVIDE','FRAC','MIDDLE','END','EQUALS','PI',
+    'PLUS','MINUS','TIMES','DIVIDE','FRAC','MIDDLE','END','EQUALS','PI','SIN',
     'LPAREN','RPAREN',
     )
 
@@ -23,13 +23,14 @@ t_FRAC    = r'@frac{'
 t_MIDDLE  = r'}{'
 t_END     = r'}'
 t_EQUALS  = r'='
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
+t_LPAREN  = r'@left\('
+t_RPAREN  = r'@right\)'
+t_SIN     = r'@sin'
 t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_PI      = r'@pi'
 
 def t_NUMBER(t):
-    r'\d+'
+    r'\d+(\.\d+)?'
     try:
         t.value = float(t.value)
     except ValueError:
@@ -85,6 +86,10 @@ def p_expression_binop(t):
 def p_expression_devide(t):
     'expression : FRAC expression MIDDLE expression END'
     t[0] = t[2] / t[4]
+
+def p_expression_sin(t):
+    'expression : SIN LPAREN expression RPAREN'
+    t[0] = math.sin(t[3])
 
 
 def p_expression_uminus(t):

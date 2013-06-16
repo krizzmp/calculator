@@ -5,6 +5,8 @@ import gtk
 import os
 import json
 import calc
+from decimal import *
+getcontext().prec = 16
 
 win = gtk.Window()
 win.resize(600, 400)
@@ -27,9 +29,9 @@ def window_title_change(web, param):
     if web.get_title().startswith("msgToPython:::"):
         message = web.get_title().split(":::",1)[1]
         # Now, send a message back to JavaScript
-        print 'h',calc.parseIt(message)
-        return_message = "You chose '%s'. How interesting." % calc.parseIt(message)
-        web.execute_script("jsCallback(%s)" % json.dumps(calc.parseIt(message)))
+        print 'h',Decimal(calc.parseIt(message))
+        return_message = "You chose '%d'. How interesting." % calc.parseIt(message)
+        web.execute_script("jsCallback(%s)" %json.dumps(calc.parseIt(message)))
 
 
 web.connect("notify::title", window_title_change)
