@@ -19,7 +19,7 @@ web = webkit.WebView()
 path = os.getcwd()
 print path
 
-web.open("file://" + path + "/index.html")
+web.open("file://" + path + "/ui/index.html")
 
 scrollView.add(web)
 
