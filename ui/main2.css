@@ -1,0 +1,35 @@
+.list{
+    width: 0 ;
+    overflow: hidden;
+    float: left;
+    height: 100%;
+    -webkit-transition:width 1s;
+}
+.list.active{
+    width: 150px ;
+}
+
+.list ul{
+    width: 500px;
+}
+.nav {
+    float: left;
+    height: 100vh;
+    width: auto;
+    background: rgb(92, 120, 129);
+    z-index: 9999;
+}
+
+
+.content {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: -999;
+    padding-left: 20px;
+}
+body {
+    height: 100vh;
+    margin: 0;
+}

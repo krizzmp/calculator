@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="main2.css"/>
+</head>
+<body ng-controller="mainController" >
+    <div class="nav">
+        <div class="list" ng-class='{active:showMenu}' data-ng-animate="'slide'">
+            <ul>
+                <li>opgave 1</li>
+                <li>opgave 2</li>
+                <li>opgave 3</li>
+                <li>opgave 4</li>
+                <li>opgave 5</li>
+                <li>settings</li>
+            </ul>
+        </div>
+        <input type="checkbox" ng-model="showMenu">
+    </div>
+    <div class="content" ng-view>
+
+    </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="angular.js"></script>
+<script type="text/javascript" src="main2.js"></script>
+</body>
+</html>
