@@ -11,6 +11,7 @@ function jsCallback(msg) {
 }
 
 
-$('body').on('keydown',function(e){
+$('body').on('keyup',function(e){
+    console.log($('textarea').val());
     test();
 });
