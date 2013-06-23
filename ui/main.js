@@ -1,9 +1,14 @@
 
 function test(){
-    var g = $('span').mathquill('latex')
-    var h=g.replace(/\\/g ,"@");
-    console.log(g+'::'+h);
-    document.title = "msgToPython:::" + h;
+    var arr=[];
+    $('.mathquill-editable').each(
+    function( index ) {
+        var g = $(this).mathquill('latex')
+        var h=g.replace(/\\/g ,"@");
+        console.log(g+'::'+h);
+        arr.push(h);
+    })
+    document.title = "msgToPython:::" + arr;
 }
 
 function jsCallback(msg) {
