@@ -27,12 +27,17 @@ def window_title_change(web, param):
     if not web.get_title():
         return
     if web.get_title().startswith("msgToPython:::"):
-        message = web.get_title().split(":::",1)[1]
+        message = web.get_title().split(":::", 1)[1]
         # Now, send a message back to JavaScript
-        #todo: update to apply to the new list input
-        print calc.parseIt(message)
-        return_message = "You chose '%d'. How interesting." % calc.parseIt(message)
-        web.execute_script("jsCallback('%s')" %calc.parseIt(message))
+        list = message.split(',')
+        print list
+
+        results=""
+        for m in list:
+            r=calc.parseIt(m)
+            results+=str(r)+','
+        return_message = "You chose '%s'. How interesting." % str(results)
+        web.execute_script("jsCallback('%s')" %str(results))
 
 
 web.connect("notify::title", window_title_change)

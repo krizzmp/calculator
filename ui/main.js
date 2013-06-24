@@ -12,11 +12,16 @@ function test(){
 }
 
 function jsCallback(msg) {
-    document.getElementById("out").innerHTML = msg;
+    console.log(msg);
+    var list=msg.split(",");
+    $(".out").each(
+    function( index ) {
+        $(this).text(list[index]);
+    })
 }
 
 
-$('body').on('keyup',function(e){
-    console.log($('textarea').val());
+$('.mathquill-editable').on('keyup',function(e){
+    console.log('element:'+this);
     test();
 });
