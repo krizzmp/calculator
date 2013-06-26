@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,400italic,300");
 @font-face {
   font-family: 'Flat-UI-Icons';
-  src: url('../fonts/Flat-UI-Icons.eot');
-  src: url('../fonts/Flat-UI-Icons.eot?#iefix') format('embedded-opentype'), url('../fonts/Flat-UI-Icons.woff') format('woff'), url('../fonts/Flat-UI-Icons.ttf') format('truetype'), url('../fonts/Flat-UI-Icons.svg#Flat-UI-Icons') format('svg');
+  src: url('./font/Flat-UI-Icons.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -411,62 +410,6 @@ you can use the generic selector below, but it's slower:
   .demo-browser {
     background-image: url(../images/demo/browser-2x.png);
   }
-}
-body {
-  color: #34495e;
-  font-family: "Lato", sans-serif;
-  font-size: 14px;
-  line-height: 1.231;
-}
-input,
-button,
-select,
-textarea {
-  font-family: "Lato", sans-serif;
-  font-size: 14px;
-}
-a {
-  color: #16a085;
-  text-decoration: underline;
-  -webkit-transition: 0.25s;
-  -moz-transition: 0.25s;
-  -o-transition: 0.25s;
-  transition: 0.25s;
-  -webkit-backface-visibility: hidden;
-}
-a:hover {
-  color: #1abc9c;
-  text-decoration: none;
-}
-h1 {
-  font-size: 32px;
-  font-weight: 900;
-}
-h2 {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
-h3 {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  margin-top: 2px;
-}
-h4 {
-  font-size: 18px;
-  font-weight: 500;
-  margin-top: 4px;
-}
-h5 {
-  font-size: 16px;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-h6 {
-  font-size: 13px;
-  font-weight: 500;
-  text-transform: uppercase;
 }
 .btn,
 .btn-group > .btn,

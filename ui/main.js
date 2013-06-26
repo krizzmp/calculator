@@ -20,6 +20,10 @@ function jsCallback(msg) {
     })
 }
 
+function toggleMenu(){
+    $('ul').toggleClass('on');
+}
+
 
 $('.mathquill-editable').on('keyup',function(e){
     console.log('element:'+this);
