@@ -13,6 +13,6 @@ eva the teen
 ------------
 
 - in secondary school
-- needs +-*/
+- needs + - * /
 - not comfortable using shortcuts
 
