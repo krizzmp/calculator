@@ -57,6 +57,9 @@ li{
     list-style: none;
     margin: 0;
     padding: 0;
+    color: #ffffff;
+    line-height: 32px;
+    font-family: arial,sans-serif;
 }
 .fui-list{
     margin: 4px;
