@@ -15,5 +15,3 @@ eva the teen
 - in secondary school
 - needs + - * /
 - not comfortable using shortcuts
-
-Gerp
