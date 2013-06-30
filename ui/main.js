@@ -21,7 +21,8 @@ function jsCallback(msg) {
 }
 
 function toggleMenu(){
-    $('ul').toggleClass('on');
+    console.log('test');
+    $('nav').toggleClass('on');
 }
 
 
