@@ -3,13 +3,14 @@ body{
 	margin:0;
     background: #999999;
     display: -webkit-box;
+    height: 100%;
 }
 .mathLine {
     padding-left: 10px;
     padding-right: 10px;
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
     border-top: 1px solid #fff;
-    background: #fbfbfb;
+    background: #f3f3f3;
     min-height: 42px;
     transition: all 1s;
 
@@ -28,13 +29,13 @@ body{
 
 .container{
     background: #ffffff;
-    min-height: 100vh;
+    min-height: 100%;
     padding: 0;
     margin: 0;
     -webkit-box-flex:1;
 }
 html{
-    height: 100vh;
+    height: 100%;
 
 }
 nav.on{
@@ -77,7 +78,6 @@ li{
     background: #1c5348;
 }
 .on > .test > .fui-list{
-    background: #444;
     margin-left: 76px;
 }
 .fui-search{
