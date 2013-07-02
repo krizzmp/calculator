@@ -1,5 +1,3 @@
-from gtk._gtk import gtk_tooltips_data_get
-
 __author__ = 'kristoffer'
 
 import webkit
@@ -42,7 +40,7 @@ def window_title_change(web, param):
         # Now, send a message back to JavaScript
         list = message.split(',')
         print list
-
+        calc.names={}
         results=""
         for m in list:
             r=calc.parseIt(m)
