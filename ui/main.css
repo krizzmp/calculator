@@ -3,7 +3,6 @@ body{
 	margin:0;
     background: #999999;
     display: -webkit-box;
-    height: 100%;
 }
 .mathLine {
     padding-left: 10px;

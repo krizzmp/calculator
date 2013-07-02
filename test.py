@@ -1,25 +1,36 @@
+from gtk._gtk import gtk_tooltips_data_get
+
 __author__ = 'kristoffer'
 
 import webkit
 import gtk
 import os
-import json
 import calc
-from decimal import *
-getcontext().prec = 16
 
 win = gtk.Window()
 win.resize(600, 400)
 win.connect('destroy', lambda w: gtk.main_quit())
 
+vBox = gtk.VBox()
+
+toolbar = gtk.Toolbar()
+toolbar.set_style(gtk.TOOLBAR_ICONS)
+
+btnTest = gtk.ToolButton(gtk.STOCK_NEW)
+toolbar.insert(btnTest,0)
+
+
+vBox.pack_start(toolbar,False)
+
 scrollView = gtk.ScrolledWindow()
-win.add(scrollView)
+vBox.add(scrollView)
+win.add(vBox)
 
 web = webkit.WebView()
 path = os.getcwd()
 print path
 
-web.open("file://" + path + "/ui/index.html")
+web.open("file://" + path + "/ui/index3.html")
 
 scrollView.add(web)
 
