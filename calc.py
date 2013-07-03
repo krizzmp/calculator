@@ -118,6 +118,7 @@ def p_expression_name(t):
         print("Undefined name '%s'" % t[1])
         t[0] = 0
 
+#todo: make errors visible in the ui
 def p_error(t):
     print("Syntax error at '%s'" % t.value)
 
