@@ -11,33 +11,35 @@ Rule 5     expression -> expression TIMES expression
 Rule 6     expression -> expression DIVIDE expression
 Rule 7     expression -> FRAC expression MIDDLE expression END
 Rule 8     expression -> SIN LPAREN expression RPAREN
-Rule 9     expression -> MINUS expression
-Rule 10    expression -> LPAREN expression RPAREN
-Rule 11    expression -> NUMBER
-Rule 12    expression -> PI
-Rule 13    expression -> NAME
+Rule 9     expression -> COS LPAREN expression RPAREN
+Rule 10    expression -> MINUS expression
+Rule 11    expression -> LPAREN expression RPAREN
+Rule 12    expression -> NUMBER
+Rule 13    expression -> PI
+Rule 14    expression -> NAME
 
 Terminals, with rules where they appear
 
+COS                  : 9
 DIVIDE               : 6
 END                  : 7
 EQUALS               : 1
 FRAC                 : 7
-LPAREN               : 8 10
+LPAREN               : 8 9 11
 MIDDLE               : 7
-MINUS                : 4 9
-NAME                 : 1 13
-NUMBER               : 11
-PI                   : 12
+MINUS                : 4 10
+NAME                 : 1 14
+NUMBER               : 12
+PI                   : 13
 PLUS                 : 3
-RPAREN               : 8 10
+RPAREN               : 8 9 11
 SIN                  : 8
 TIMES                : 5
 error                : 
 
 Nonterminals, with rules where they appear
 
-expression           : 1 2 3 3 4 4 5 5 6 6 7 7 8 9 10
+expression           : 1 2 3 3 4 4 5 5 6 6 7 7 8 9 10 11
 statement            : 0
 
 Parsing method: LALR
@@ -53,24 +55,33 @@ state 0
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    NAME            shift and go to state 2
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
+    NAME            shift and go to state 3
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
 
-    expression                     shift and go to state 8
-    statement                      shift and go to state 5
+    expression                     shift and go to state 9
+    statement                      shift and go to state 6
 
 state 1
+
+    (9) expression -> COS . LPAREN expression RPAREN
+
+    LPAREN          shift and go to state 11
+
+
+state 2
 
     (7) expression -> FRAC . expression MIDDLE expression END
     (3) expression -> . expression PLUS expression
@@ -79,102 +90,106 @@ state 1
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 11
-
-state 2
-
-    (1) statement -> NAME . EQUALS expression
-    (13) expression -> NAME .
-
-    EQUALS          shift and go to state 12
-    PLUS            reduce using rule 13 (expression -> NAME .)
-    MINUS           reduce using rule 13 (expression -> NAME .)
-    TIMES           reduce using rule 13 (expression -> NAME .)
-    DIVIDE          reduce using rule 13 (expression -> NAME .)
-    $end            reduce using rule 13 (expression -> NAME .)
-
+    expression                     shift and go to state 13
 
 state 3
 
-    (11) expression -> NUMBER .
+    (1) statement -> NAME . EQUALS expression
+    (14) expression -> NAME .
 
-    PLUS            reduce using rule 11 (expression -> NUMBER .)
-    MINUS           reduce using rule 11 (expression -> NUMBER .)
-    TIMES           reduce using rule 11 (expression -> NUMBER .)
-    DIVIDE          reduce using rule 11 (expression -> NUMBER .)
-    $end            reduce using rule 11 (expression -> NUMBER .)
-    MIDDLE          reduce using rule 11 (expression -> NUMBER .)
-    RPAREN          reduce using rule 11 (expression -> NUMBER .)
-    END             reduce using rule 11 (expression -> NUMBER .)
+    EQUALS          shift and go to state 14
+    PLUS            reduce using rule 14 (expression -> NAME .)
+    MINUS           reduce using rule 14 (expression -> NAME .)
+    TIMES           reduce using rule 14 (expression -> NAME .)
+    DIVIDE          reduce using rule 14 (expression -> NAME .)
+    $end            reduce using rule 14 (expression -> NAME .)
 
 
 state 4
 
-    (8) expression -> SIN . LPAREN expression RPAREN
+    (12) expression -> NUMBER .
 
-    LPAREN          shift and go to state 13
+    PLUS            reduce using rule 12 (expression -> NUMBER .)
+    MINUS           reduce using rule 12 (expression -> NUMBER .)
+    TIMES           reduce using rule 12 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 12 (expression -> NUMBER .)
+    $end            reduce using rule 12 (expression -> NUMBER .)
+    MIDDLE          reduce using rule 12 (expression -> NUMBER .)
+    RPAREN          reduce using rule 12 (expression -> NUMBER .)
+    END             reduce using rule 12 (expression -> NUMBER .)
 
 
 state 5
+
+    (8) expression -> SIN . LPAREN expression RPAREN
+
+    LPAREN          shift and go to state 15
+
+
+state 6
 
     (0) S' -> statement .
 
 
 
-state 6
+state 7
 
-    (10) expression -> LPAREN . expression RPAREN
+    (11) expression -> LPAREN . expression RPAREN
     (3) expression -> . expression PLUS expression
     (4) expression -> . expression MINUS expression
     (5) expression -> . expression TIMES expression
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 14
-
-state 7
-
-    (12) expression -> PI .
-
-    PLUS            reduce using rule 12 (expression -> PI .)
-    MINUS           reduce using rule 12 (expression -> PI .)
-    TIMES           reduce using rule 12 (expression -> PI .)
-    DIVIDE          reduce using rule 12 (expression -> PI .)
-    $end            reduce using rule 12 (expression -> PI .)
-    MIDDLE          reduce using rule 12 (expression -> PI .)
-    RPAREN          reduce using rule 12 (expression -> PI .)
-    END             reduce using rule 12 (expression -> PI .)
-
+    expression                     shift and go to state 16
 
 state 8
+
+    (13) expression -> PI .
+
+    PLUS            reduce using rule 13 (expression -> PI .)
+    MINUS           reduce using rule 13 (expression -> PI .)
+    TIMES           reduce using rule 13 (expression -> PI .)
+    DIVIDE          reduce using rule 13 (expression -> PI .)
+    $end            reduce using rule 13 (expression -> PI .)
+    MIDDLE          reduce using rule 13 (expression -> PI .)
+    RPAREN          reduce using rule 13 (expression -> PI .)
+    END             reduce using rule 13 (expression -> PI .)
+
+
+state 9
 
     (2) statement -> expression .
     (3) expression -> expression . PLUS expression
@@ -183,52 +198,81 @@ state 8
     (6) expression -> expression . DIVIDE expression
 
     $end            reduce using rule 2 (statement -> expression .)
-    PLUS            shift and go to state 15
-    MINUS           shift and go to state 17
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 16
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 18
 
 
-state 9
+state 10
 
-    (9) expression -> MINUS . expression
+    (10) expression -> MINUS . expression
     (3) expression -> . expression PLUS expression
     (4) expression -> . expression MINUS expression
     (5) expression -> . expression TIMES expression
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 19
-
-state 10
-
-    (13) expression -> NAME .
-
-    PLUS            reduce using rule 13 (expression -> NAME .)
-    MINUS           reduce using rule 13 (expression -> NAME .)
-    TIMES           reduce using rule 13 (expression -> NAME .)
-    DIVIDE          reduce using rule 13 (expression -> NAME .)
-    $end            reduce using rule 13 (expression -> NAME .)
-    MIDDLE          reduce using rule 13 (expression -> NAME .)
-    RPAREN          reduce using rule 13 (expression -> NAME .)
-    END             reduce using rule 13 (expression -> NAME .)
-
+    expression                     shift and go to state 21
 
 state 11
+
+    (9) expression -> COS LPAREN . expression RPAREN
+    (3) expression -> . expression PLUS expression
+    (4) expression -> . expression MINUS expression
+    (5) expression -> . expression TIMES expression
+    (6) expression -> . expression DIVIDE expression
+    (7) expression -> . FRAC expression MIDDLE expression END
+    (8) expression -> . SIN LPAREN expression RPAREN
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
+
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
+
+    expression                     shift and go to state 22
+
+state 12
+
+    (14) expression -> NAME .
+
+    PLUS            reduce using rule 14 (expression -> NAME .)
+    MINUS           reduce using rule 14 (expression -> NAME .)
+    TIMES           reduce using rule 14 (expression -> NAME .)
+    DIVIDE          reduce using rule 14 (expression -> NAME .)
+    $end            reduce using rule 14 (expression -> NAME .)
+    MIDDLE          reduce using rule 14 (expression -> NAME .)
+    RPAREN          reduce using rule 14 (expression -> NAME .)
+    END             reduce using rule 14 (expression -> NAME .)
+
+
+state 13
 
     (7) expression -> FRAC expression . MIDDLE expression END
     (3) expression -> expression . PLUS expression
@@ -236,14 +280,14 @@ state 11
     (5) expression -> expression . TIMES expression
     (6) expression -> expression . DIVIDE expression
 
-    MIDDLE          shift and go to state 20
-    PLUS            shift and go to state 15
-    MINUS           shift and go to state 17
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 16
+    MIDDLE          shift and go to state 23
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 18
 
 
-state 12
+state 14
 
     (1) statement -> NAME EQUALS . expression
     (3) expression -> . expression PLUS expression
@@ -252,23 +296,25 @@ state 12
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 21
+    expression                     shift and go to state 24
 
-state 13
+state 15
 
     (8) expression -> SIN LPAREN . expression RPAREN
     (3) expression -> . expression PLUS expression
@@ -277,38 +323,40 @@ state 13
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 22
+    expression                     shift and go to state 25
 
-state 14
+state 16
 
-    (10) expression -> LPAREN expression . RPAREN
+    (11) expression -> LPAREN expression . RPAREN
     (3) expression -> expression . PLUS expression
     (4) expression -> expression . MINUS expression
     (5) expression -> expression . TIMES expression
     (6) expression -> expression . DIVIDE expression
 
-    RPAREN          shift and go to state 23
-    PLUS            shift and go to state 15
-    MINUS           shift and go to state 17
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 16
+    RPAREN          shift and go to state 26
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 18
 
 
-state 15
+state 17
 
     (3) expression -> expression PLUS . expression
     (3) expression -> . expression PLUS expression
@@ -317,23 +365,25 @@ state 15
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 24
+    expression                     shift and go to state 27
 
-state 16
+state 18
 
     (6) expression -> expression DIVIDE . expression
     (3) expression -> . expression PLUS expression
@@ -342,23 +392,25 @@ state 16
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 25
+    expression                     shift and go to state 28
 
-state 17
+state 19
 
     (4) expression -> expression MINUS . expression
     (3) expression -> . expression PLUS expression
@@ -367,23 +419,25 @@ state 17
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 26
+    expression                     shift and go to state 29
 
-state 18
+state 20
 
     (5) expression -> expression TIMES . expression
     (3) expression -> . expression PLUS expression
@@ -392,46 +446,63 @@ state 18
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 27
+    expression                     shift and go to state 30
 
-state 19
+state 21
 
-    (9) expression -> MINUS expression .
+    (10) expression -> MINUS expression .
     (3) expression -> expression . PLUS expression
     (4) expression -> expression . MINUS expression
     (5) expression -> expression . TIMES expression
     (6) expression -> expression . DIVIDE expression
 
-    PLUS            reduce using rule 9 (expression -> MINUS expression .)
-    MINUS           reduce using rule 9 (expression -> MINUS expression .)
-    TIMES           reduce using rule 9 (expression -> MINUS expression .)
-    DIVIDE          reduce using rule 9 (expression -> MINUS expression .)
-    $end            reduce using rule 9 (expression -> MINUS expression .)
-    MIDDLE          reduce using rule 9 (expression -> MINUS expression .)
-    RPAREN          reduce using rule 9 (expression -> MINUS expression .)
-    END             reduce using rule 9 (expression -> MINUS expression .)
+    PLUS            reduce using rule 10 (expression -> MINUS expression .)
+    MINUS           reduce using rule 10 (expression -> MINUS expression .)
+    TIMES           reduce using rule 10 (expression -> MINUS expression .)
+    DIVIDE          reduce using rule 10 (expression -> MINUS expression .)
+    $end            reduce using rule 10 (expression -> MINUS expression .)
+    MIDDLE          reduce using rule 10 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 10 (expression -> MINUS expression .)
+    END             reduce using rule 10 (expression -> MINUS expression .)
 
-  ! PLUS            [ shift and go to state 15 ]
-  ! MINUS           [ shift and go to state 17 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 16 ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 19 ]
+  ! TIMES           [ shift and go to state 20 ]
+  ! DIVIDE          [ shift and go to state 18 ]
 
 
-state 20
+state 22
+
+    (9) expression -> COS LPAREN expression . RPAREN
+    (3) expression -> expression . PLUS expression
+    (4) expression -> expression . MINUS expression
+    (5) expression -> expression . TIMES expression
+    (6) expression -> expression . DIVIDE expression
+
+    RPAREN          shift and go to state 31
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 18
+
+
+state 23
 
     (7) expression -> FRAC expression MIDDLE . expression END
     (3) expression -> . expression PLUS expression
@@ -440,23 +511,25 @@ state 20
     (6) expression -> . expression DIVIDE expression
     (7) expression -> . FRAC expression MIDDLE expression END
     (8) expression -> . SIN LPAREN expression RPAREN
-    (9) expression -> . MINUS expression
-    (10) expression -> . LPAREN expression RPAREN
-    (11) expression -> . NUMBER
-    (12) expression -> . PI
-    (13) expression -> . NAME
+    (9) expression -> . COS LPAREN expression RPAREN
+    (10) expression -> . MINUS expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . NUMBER
+    (13) expression -> . PI
+    (14) expression -> . NAME
 
-    FRAC            shift and go to state 1
-    SIN             shift and go to state 4
-    MINUS           shift and go to state 9
-    LPAREN          shift and go to state 6
-    NUMBER          shift and go to state 3
-    PI              shift and go to state 7
-    NAME            shift and go to state 10
+    FRAC            shift and go to state 2
+    SIN             shift and go to state 5
+    COS             shift and go to state 1
+    MINUS           shift and go to state 10
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 4
+    PI              shift and go to state 8
+    NAME            shift and go to state 12
 
-    expression                     shift and go to state 28
+    expression                     shift and go to state 32
 
-state 21
+state 24
 
     (1) statement -> NAME EQUALS expression .
     (3) expression -> expression . PLUS expression
@@ -465,13 +538,13 @@ state 21
     (6) expression -> expression . DIVIDE expression
 
     $end            reduce using rule 1 (statement -> NAME EQUALS expression .)
-    PLUS            shift and go to state 15
-    MINUS           shift and go to state 17
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 16
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 18
 
 
-state 22
+state 25
 
     (8) expression -> SIN LPAREN expression . RPAREN
     (3) expression -> expression . PLUS expression
@@ -479,28 +552,28 @@ state 22
     (5) expression -> expression . TIMES expression
     (6) expression -> expression . DIVIDE expression
 
-    RPAREN          shift and go to state 29
-    PLUS            shift and go to state 15
-    MINUS           shift and go to state 17
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 16
+    RPAREN          shift and go to state 33
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 18
 
 
-state 23
+state 26
 
-    (10) expression -> LPAREN expression RPAREN .
+    (11) expression -> LPAREN expression RPAREN .
 
-    PLUS            reduce using rule 10 (expression -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 10 (expression -> LPAREN expression RPAREN .)
-    TIMES           reduce using rule 10 (expression -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 10 (expression -> LPAREN expression RPAREN .)
-    $end            reduce using rule 10 (expression -> LPAREN expression RPAREN .)
-    MIDDLE          reduce using rule 10 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 10 (expression -> LPAREN expression RPAREN .)
-    END             reduce using rule 10 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    $end            reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    MIDDLE          reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    END             reduce using rule 11 (expression -> LPAREN expression RPAREN .)
 
 
-state 24
+state 27
 
     (3) expression -> expression PLUS expression .
     (3) expression -> expression . PLUS expression
@@ -514,16 +587,16 @@ state 24
     MIDDLE          reduce using rule 3 (expression -> expression PLUS expression .)
     RPAREN          reduce using rule 3 (expression -> expression PLUS expression .)
     END             reduce using rule 3 (expression -> expression PLUS expression .)
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 16
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 18
 
   ! TIMES           [ reduce using rule 3 (expression -> expression PLUS expression .) ]
   ! DIVIDE          [ reduce using rule 3 (expression -> expression PLUS expression .) ]
-  ! PLUS            [ shift and go to state 15 ]
-  ! MINUS           [ shift and go to state 17 ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 19 ]
 
 
-state 25
+state 28
 
     (6) expression -> expression DIVIDE expression .
     (3) expression -> expression . PLUS expression
@@ -540,13 +613,13 @@ state 25
     RPAREN          reduce using rule 6 (expression -> expression DIVIDE expression .)
     END             reduce using rule 6 (expression -> expression DIVIDE expression .)
 
-  ! PLUS            [ shift and go to state 15 ]
-  ! MINUS           [ shift and go to state 17 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 16 ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 19 ]
+  ! TIMES           [ shift and go to state 20 ]
+  ! DIVIDE          [ shift and go to state 18 ]
 
 
-state 26
+state 29
 
     (4) expression -> expression MINUS expression .
     (3) expression -> expression . PLUS expression
@@ -560,16 +633,16 @@ state 26
     MIDDLE          reduce using rule 4 (expression -> expression MINUS expression .)
     RPAREN          reduce using rule 4 (expression -> expression MINUS expression .)
     END             reduce using rule 4 (expression -> expression MINUS expression .)
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 16
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 18
 
   ! TIMES           [ reduce using rule 4 (expression -> expression MINUS expression .) ]
   ! DIVIDE          [ reduce using rule 4 (expression -> expression MINUS expression .) ]
-  ! PLUS            [ shift and go to state 15 ]
-  ! MINUS           [ shift and go to state 17 ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 19 ]
 
 
-state 27
+state 30
 
     (5) expression -> expression TIMES expression .
     (3) expression -> expression . PLUS expression
@@ -586,13 +659,27 @@ state 27
     RPAREN          reduce using rule 5 (expression -> expression TIMES expression .)
     END             reduce using rule 5 (expression -> expression TIMES expression .)
 
-  ! PLUS            [ shift and go to state 15 ]
-  ! MINUS           [ shift and go to state 17 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 16 ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 19 ]
+  ! TIMES           [ shift and go to state 20 ]
+  ! DIVIDE          [ shift and go to state 18 ]
 
 
-state 28
+state 31
+
+    (9) expression -> COS LPAREN expression RPAREN .
+
+    PLUS            reduce using rule 9 (expression -> COS LPAREN expression RPAREN .)
+    MINUS           reduce using rule 9 (expression -> COS LPAREN expression RPAREN .)
+    TIMES           reduce using rule 9 (expression -> COS LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 9 (expression -> COS LPAREN expression RPAREN .)
+    $end            reduce using rule 9 (expression -> COS LPAREN expression RPAREN .)
+    MIDDLE          reduce using rule 9 (expression -> COS LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 9 (expression -> COS LPAREN expression RPAREN .)
+    END             reduce using rule 9 (expression -> COS LPAREN expression RPAREN .)
+
+
+state 32
 
     (7) expression -> FRAC expression MIDDLE expression . END
     (3) expression -> expression . PLUS expression
@@ -600,14 +687,14 @@ state 28
     (5) expression -> expression . TIMES expression
     (6) expression -> expression . DIVIDE expression
 
-    END             shift and go to state 30
-    PLUS            shift and go to state 15
-    MINUS           shift and go to state 17
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 16
+    END             shift and go to state 34
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 18
 
 
-state 29
+state 33
 
     (8) expression -> SIN LPAREN expression RPAREN .
 
@@ -621,7 +708,7 @@ state 29
     END             reduce using rule 8 (expression -> SIN LPAREN expression RPAREN .)
 
 
-state 30
+state 34
 
     (7) expression -> FRAC expression MIDDLE expression END .
 

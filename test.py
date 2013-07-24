@@ -44,9 +44,10 @@ def window_title_change(web, param):
         results=""
         for m in list:
             r=calc.parseIt(m)
-            results+=str(r)+','
+            results+=calc.sympy.latex(r,mul_symbol='dot').encode('string-escape')+','
         return_message = "You chose '%s'. How interesting." % str(results)
-        web.execute_script("jsCallback('%s')" %str(results))
+        web.execute_script("jsCallback('%s')" %results)
+        print return_message
 
 
 web.connect("notify::title", window_title_change)

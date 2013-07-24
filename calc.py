@@ -10,7 +10,8 @@ import sympy
 
 tokens = (
     'NAME','NUMBER',
-    'PLUS','MINUS','TIMES','DIVIDE','FRAC','MIDDLE','END','EQUALS','PI','SIN',
+    'PLUS','MINUS','TIMES','DIVIDE','FRAC','MIDDLE','END','EQUALS',
+    'PI','SIN','COS',
     'LPAREN','RPAREN',
     )
 
@@ -27,6 +28,7 @@ t_EQUALS  = r'='
 t_LPAREN  = r'@left\('
 t_RPAREN  = r'@right\)'
 t_SIN     = r'@sin'
+t_COS     = r'@cos'
 t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_PI      = r'@pi'
 
@@ -93,6 +95,10 @@ def p_expression_sin(t):
     'expression : SIN LPAREN expression RPAREN'
     t[0] = sympy.sin(t[3])
 
+def p_expression_cos(t):
+    'expression : COS LPAREN expression RPAREN'
+    t[0] = sympy.cos(t[3])
+
 
 def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
@@ -131,4 +137,6 @@ def parseIt(s):
     return result[0]
 
 if __name__ == "__main__":
-    print 'return value:',parseIt('@pi@cdot'),'end'
+    print 'return value:',parseIt('@pi@cdot6'),'end'
+    print 'return value:',parseIt('@sin@left(@pi@right)'),'end'
+    print 'return value:',parseIt('@cos@left(@pi@right)'),'end'
