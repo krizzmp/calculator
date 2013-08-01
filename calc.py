@@ -35,7 +35,7 @@ t_PI      = r'@pi'
 def t_NUMBER(t):
     r'\d+(\.\d+)?'
     try:
-        t.value = float(t.value)
+        t.value = sympy.S(t.value)
     except ValueError:
         print("Integer value too large %d", t.value)
         t.value = 0
@@ -71,25 +71,25 @@ result = ['']
 def p_statement_assign(t):
     'statement : NAME EQUALS expression'
     names[t[1]] = t[3]
-    result[0] = t[3]
+    result[0] = sympy.S(t[3])
 
 def p_statement_expr(t):
     'statement : expression'
-    result[0] = t[1]
+    result[0] = sympy.S(t[1])
 
 def p_expression_binop(t):
     '''expression : expression PLUS expression
                   | expression MINUS expression
                   | expression TIMES expression
                   | expression DIVIDE expression'''
-    if t[2] == '+'  : t[0] = t[1] + t[3]
-    elif t[2] == '-': t[0] = t[1] - t[3]
-    elif t[2] == r'@cdot': t[0] = t[1] * t[3]
+    if t[2] == '+'  : t[0] = sympy.S(t[1] + t[3])
+    elif t[2] == '-': t[0] = sympy.S(t[1]) - sympy.S(t[3])
+    elif t[2] == r'@cdot': t[0] = sympy.S(t[1] * t[3])
     elif t[2] == '/': t[0] = t[1] / t[3]
 
 def p_expression_devide(t):
     'expression : FRAC expression MIDDLE expression END'
-    t[0] = t[2] / t[4]
+    t[0] = sympy.Rational(t[2] / t[4])
 
 def p_expression_sin(t):
     'expression : SIN LPAREN expression RPAREN'
@@ -102,15 +102,15 @@ def p_expression_cos(t):
 
 def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
-    t[0] = -t[2]
+    t[0] = sympy.S(-t[2])
 
 def p_expression_group(t):
     'expression : LPAREN expression RPAREN'
-    t[0] = t[2]
+    t[0] = sympy.S(t[2])
 
 def p_expression_number(t):
     'expression : NUMBER'
-    t[0] = t[1]
+    t[0] = sympy.S(t[1])
 
 def p_expression_pi(t):
     'expression : PI'
@@ -134,7 +134,7 @@ parser = yacc.yacc()
 
 def parseIt(s):
     parser.parse(s)
-    return result[0]
+    return sympy.S(result[0])
 
 if __name__ == "__main__":
     print 'return value:',parseIt('@pi@cdot6'),'end'
