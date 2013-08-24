@@ -9,28 +9,29 @@ import math
 import sympy
 
 tokens = (
-    'NAME','NUMBER',
-    'PLUS','MINUS','TIMES','DIVIDE','FRAC','MIDDLE','END','EQUALS',
-    'PI','SIN','COS',
-    'LPAREN','RPAREN',
-    )
+    'NAME', 'NUMBER',
+    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'FRAC', 'MIDDLE', 'END', 'EQUALS',
+    'PI', 'SIN', 'COS',
+    'LPAREN', 'RPAREN',
+)
 
 # Tokens
 
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'@cdot'
-t_DIVIDE  = r'/'
-t_FRAC    = r'@frac{'
-t_MIDDLE  = r'}{'
-t_END     = r'}'
-t_EQUALS  = r'='
-t_LPAREN  = r'@left\('
-t_RPAREN  = r'@right\)'
-t_SIN     = r'@sin'
-t_COS     = r'@cos'
-t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
-t_PI      = r'@pi'
+t_PLUS = r'\+'
+t_MINUS = r'-'
+t_TIMES = r'@cdot'
+t_DIVIDE = r'/'
+t_FRAC = r'@frac{'
+t_MIDDLE = r'}{'
+t_END = r'}'
+t_EQUALS = r'='
+t_LPAREN = r'@left\('
+t_RPAREN = r'@right\)'
+t_SIN = r'@sin'
+t_COS = r'@cos'
+t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
+t_PI = r'@pi'
+
 
 def t_NUMBER(t):
     r'\d+(\.\d+)?'
@@ -44,9 +45,11 @@ def t_NUMBER(t):
 # Ignored characters
 t_ignore = " \t"
 
+
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
+
 
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
@@ -54,46 +57,57 @@ def t_error(t):
 
 # Build the lexer
 import ply.lex as lex
+
 lex.lex()
 
 # Parsing rules
 
 precedence = (
-    ('left','PLUS','MINUS'),
-    ('left','TIMES','DIVIDE'),
-    ('right','UMINUS'),
-    )
+    ('left', 'PLUS', 'MINUS'),
+    ('left', 'TIMES', 'DIVIDE'),
+    ('right', 'UMINUS'),
+)
 
 # dictionary of names
-names = { }
+names = {}
 result = ['']
+
 
 def p_statement_assign(t):
     'statement : NAME EQUALS expression'
     names[t[1]] = t[3]
     result[0] = sympy.S(t[3])
 
+
 def p_statement_expr(t):
     'statement : expression'
     result[0] = sympy.S(t[1])
+
 
 def p_expression_binop(t):
     '''expression : expression PLUS expression
                   | expression MINUS expression
                   | expression TIMES expression
                   | expression DIVIDE expression'''
-    if t[2] == '+'  : t[0] = sympy.S(t[1] + t[3])
-    elif t[2] == '-': t[0] = sympy.S(t[1]) - sympy.S(t[3])
-    elif t[2] == r'@cdot': t[0] = sympy.S(t[1] * t[3])
-    elif t[2] == '/': t[0] = t[1] / t[3]
+    if t[2] == '+':
+        t[0] = sympy.S(t[1] + t[3])
+    elif t[2] == '-':
+        t[0] = sympy.S(t[1]) - sympy.S(t[3])
+    elif t[2] == r'@cdot':
+        t[0] = sympy.S(t[1] * t[3])
+    elif t[2] == '/':
+        t[0] = t[1] / t[3]
+
 
 def p_expression_devide(t):
     'expression : FRAC expression MIDDLE expression END'
     t[0] = sympy.Rational(t[2] / t[4])
 
+
 def p_expression_sin(t):
     'expression : SIN LPAREN expression RPAREN'
     t[0] = sympy.sin(t[3])
+
 
 def p_expression_cos(t):
     'expression : COS LPAREN expression RPAREN'
@@ -104,17 +118,21 @@ def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
     t[0] = sympy.S(-t[2])
 
+
 def p_expression_group(t):
     'expression : LPAREN expression RPAREN'
     t[0] = sympy.S(t[2])
+
 
 def p_expression_number(t):
     'expression : NUMBER'
     t[0] = sympy.S(t[1])
 
+
 def p_expression_pi(t):
     'expression : PI'
     t[0] = sympy.pi
+
 
 def p_expression_name(t):
     'expression : NAME'
@@ -128,7 +146,9 @@ def p_expression_name(t):
 def p_error(t):
     print("Syntax error at '%s'" % t.value)
 
+
 import ply.yacc as yacc
+
 parser = yacc.yacc()
 
 
@@ -136,7 +156,8 @@ def parseIt(s):
     parser.parse(s)
     return sympy.S(result[0])
 
+
 if __name__ == "__main__":
-    print 'return value:',parseIt('@pi@cdot6'),'end'
-    print 'return value:',parseIt('@sin@left(@pi@right)'),'end'
-    print 'return value:',parseIt('@cos@left(@pi@right)'),'end'
+    print 'return value:', parseIt('@pi@cdot6'), 'end'
+    print 'return value:', parseIt('@sin@left(@pi@right)'), 'end'
+    print 'return value:', parseIt('@cos@left(@pi@right)'), 'end'
