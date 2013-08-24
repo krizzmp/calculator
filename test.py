@@ -38,7 +38,7 @@ def window_title_change(web, param):
     if web.get_title().startswith("msgToPython:::"):
         message = web.get_title().split(":::", 1)[1]
         # Now, send a message back to JavaScript
-        list = message.split(',')
+        list = message.split(';;;')
         print list
         calc.names={}
         results=""

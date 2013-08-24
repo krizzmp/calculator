@@ -8,7 +8,13 @@ function test(){
         //console.log(g+'::'+h);
         arr.push(h);
     })
-    document.title = "msgToPython:::" + arr;
+    var str='';
+    for(var i=0;i<arr.length-1;i++){
+        str+=arr[i]+';;;';
+        console.log(str);
+    }
+    str+=arr[arr.length-1];
+    document.title = "msgToPython:::" + str;
 }
 
 function jsCallback(msg) {

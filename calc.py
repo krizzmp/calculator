@@ -5,7 +5,6 @@ __author__ = 'kristoffer'
 #
 # A simple calculator with variables -- all in one file.
 # -----------------------------------------------------------------------------
-import math
 import sympy
 
 tokens = (
@@ -13,6 +12,7 @@ tokens = (
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'FRAC', 'MIDDLE', 'END', 'EQUALS',
     'PI', 'SIN', 'COS',
     'LPAREN', 'RPAREN',
+    'SOLVE', 'COMMA'
 )
 
 # Tokens
@@ -31,6 +31,8 @@ t_SIN = r'@sin'
 t_COS = r'@cos'
 t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_PI = r'@pi'
+t_SOLVE = r'@text{solve}'
+t_COMMA = r','
 
 
 def t_NUMBER(t):
@@ -139,8 +141,24 @@ def p_expression_name(t):
     try:
         t[0] = names[t[1]]
     except LookupError:
-        print("Undefined name '%s'" % t[1])
-        t[0] = 0
+        t[0] = sympy.symbols(t[1])
+
+
+def p_expression_name2(t):
+    'expression2 : expression EQUALS expression'
+    t[0] = sympy.Eq(t[1], t[3])
+
+
+def p_expression_name3(t):
+    'expression : expression2'
+    t[0] = t[1]
+
+
+def p_expression_solve(t):
+    'expression : SOLVE LPAREN expression2 COMMA NAME RPAREN'
+    t[0] = sympy.solve(t[3], t[5])[0]
+    print t[0]
+
 
 #todo: make errors visible in the ui
 def p_error(t):
